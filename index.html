@@ -6,7 +6,24 @@
     <title>Clicker Game</title>
 </head>
 <body>
-    <div id="click-display">0</div>
+    <div id="click-count-display">0</div>
     <button id="click-me">Click</button>
+
+    <script>
+        const clickCountDisplay = document.getElementById("click-count-display")
+        const clickMeButton = document.getElementById("click-me");
+        
+        const GameManager = {
+            counter: 0,
+            showClickCount () {
+                clickCountDisplay.textContent = this.counter; 
+            }
+        };
+
+        clickMeButton.addEventListener("click", () => {
+            GameManager.counter++;
+            GameManager.showClickCount();
+        });
+    </script>
 </body>
 </html>
