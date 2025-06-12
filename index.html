@@ -83,6 +83,10 @@
             } else {
                 GameManager.counter++;
             }
+
+            if (GameManager.counter < 0) {
+                GameManager.counter = 0;
+            }
                 
             GameManager.showClickCount();
         });
