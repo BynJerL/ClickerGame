@@ -73,7 +73,12 @@
         };
 
         clickMeButton.addEventListener("click", () => {
-            GameManager.counter++;
+            const randomValue = Math.random() * 1000;
+            if (randomValue < 5) {
+                GameManager.counter += 10;
+            } else {
+                GameManager.counter++;
+            }
             GameManager.showClickCount();
         });
     </script>
