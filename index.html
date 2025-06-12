@@ -76,9 +76,14 @@
             const randomValue = Math.random() * 1000;
             if (randomValue < 5) {
                 GameManager.counter += 10;
+            } else if (randomValue < 25) {
+                GameManager.counter += 5;
+            } else if (randomValue < 30) {
+                GameManager.counter -= 8;
             } else {
                 GameManager.counter++;
             }
+                
             GameManager.showClickCount();
         });
     </script>
