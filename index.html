@@ -96,6 +96,19 @@
         </div>
         <div id="coins-display">0</div>
         <button id="click-me">Click</button>
+        <div id="shop-container">
+            <div>Shop</div>
+            <div class="item-card">
+                <div class="item-icon">🪙</div>
+                <div class="item-name">Coin Boost 1</div>
+                <button class="purchase-button">Purchase</button>
+            </div>
+            <div class="item-card">
+                <div class="item-icon">🪙</div>
+                <div class="item-name">Coin Boost 2</div>
+                <button class="purchase-button">Purchase</button>
+            </div>
+        </div>
     </div>
     
 
@@ -113,6 +126,10 @@
             exp_multiplier: 1,
             exp_limit: 250,
             level: 1,
+            items: {
+                coin_boost_1: false,
+                coin_boost_2: false
+            },
             showCoins () {
                 coinsDisplay.textContent = this.coins; 
             },
