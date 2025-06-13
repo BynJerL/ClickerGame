@@ -115,6 +115,7 @@
         };
 
         clickMeButton.addEventListener("click", () => {
+            clickMeButton.blur();
             GameManager.counter++;
             GameManager.experience += GameManager.exp_multiplier;
 
