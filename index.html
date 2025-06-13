@@ -18,7 +18,7 @@
             align-items: center;
         }
 
-        #click-count-display {
+        #coins-display {
             width: 150px;
             height: 100px;
             background-color: beige;
@@ -56,36 +56,40 @@
 </head>
 <body>
     <div id="game-container">
-        <div id="click-count-display">0</div>
+        <div id="coins-display">0</div>
         <button id="click-me">Click</button>
     </div>
     
 
     <script>
-        const clickCountDisplay = document.getElementById("click-count-display")
+        const coinsDisplay = document.getElementById("coins-display")
         const clickMeButton = document.getElementById("click-me");
         
         const GameManager = {
             counter: 0,
+            coins: 0,
+            experience: 0,
             showClickCount () {
-                clickCountDisplay.textContent = this.counter; 
+                coinsDisplay.textContent = this.counter; 
             }
         };
 
         clickMeButton.addEventListener("click", () => {
+            GameManager.counter++;
+
             const randomValue = Math.random() * 1000;
             if (randomValue < 5) {
-                GameManager.counter += 10;
+                GameManager.coins += 10;
             } else if (randomValue < 25) {
-                GameManager.counter += 5;
+                GameManager.coins += 5;
             } else if (randomValue < 30) {
-                GameManager.counter -= 8;
+                GameManager.coins -= 3;
             } else {
-                GameManager.counter++;
+                GameManager.coins++;
             }
 
-            if (GameManager.counter < 0) {
-                GameManager.counter = 0;
+            if (GameManager.coins < 0) {
+                GameManager.coins = 0;
             }
                 
             GameManager.showClickCount();
