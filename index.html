@@ -85,6 +85,59 @@
         .no-select {
             user-select: none;
         }
+
+        .item-card {
+            width: 100px;
+            height: 150px;
+            background-color:beige;
+            box-shadow: 2px 2px 5px grey;
+        }
+        
+        .item-icon {
+            height: 90px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-info {
+            background-color: lightseagreen;
+            height: 60px;
+            position: relative;
+        }
+
+        .item-name, .item-price {
+            font-size: 12.5px;
+        }
+
+        .purchase-button {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 25px;
+        }
+
+        .top-icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .bottom-icon {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        .center-icon {
+            font-size: 60px;
+        }
+
+        #shop-items {
+            display: flex;
+            gap: 15px;
+        }
     </style>
 </head>
 <body>
@@ -98,15 +151,31 @@
         <button id="click-me">Click</button>
         <div id="shop-container">
             <div>Shop</div>
-            <div class="item-card">
-                <div class="item-icon">🪙</div>
-                <div class="item-name">Coin Boost 1</div>
-                <button class="purchase-button">Purchase</button>
-            </div>
-            <div class="item-card">
-                <div class="item-icon">🪙</div>
-                <div class="item-name">Coin Boost 2</div>
-                <button class="purchase-button">Purchase</button>
+            <div id="shop-items">
+                <div class="item-card">
+                    <div class="item-icon">
+                        <div class="top-icon">⬆️</div>
+                        <div class="center-icon">🪙</div>
+                        <div class="bottom-icon">1️⃣</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="item-name">Coin Boost 1</div>
+                        <div class="item-price">🪙300</div>
+                        <button class="purchase-button">Purchase</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-icon">
+                        <div class="top-icon">⬆️</div>
+                        <div class="center-icon">🪙</div>
+                        <div class="bottom-icon">2️⃣</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="item-name">Coin Boost 2</div>
+                        <div class="item-price">🪙5000</div>
+                        <button class="purchase-button">Purchase</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
