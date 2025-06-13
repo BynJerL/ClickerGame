@@ -127,6 +127,12 @@
             if (GameManager.coins < 0) {
                 GameManager.coins = 0;
             }
+
+            if (GameManager.experience >= GameManager.exp_limit) {
+                GameManager.experience = 0;
+                GameManager.exp_limit += 250;
+                GameManager.level++;
+            }
                 
             GameManager.showCoins();
             GameManager.updateExpBar();
