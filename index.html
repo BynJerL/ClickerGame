@@ -81,10 +81,14 @@
             color: white;
             text-shadow: 1px 1px 1px black;
         }
+
+        .no-select {
+            user-select: none;
+        }
     </style>
 </head>
 <body>
-    <div id="game-container">
+    <div id="game-container" class="no-select">
         <div id="level-display">Level <span id="level-value"></span></div>
         <div id="exp-bar">
             <div id="exp-progress"></div>
@@ -126,13 +130,15 @@
             GameManager.counter++;
             GameManager.experience += GameManager.exp_multiplier;
 
-            const randomValue = Math.random() * 1000;
-            if (randomValue < 5) {
+            const randomValue = Math.random() * 100000;
+            if (randomValue < 50) {
                 GameManager.coins += 10;
-            } else if (randomValue < 25) {
+            } else if (randomValue < 250) {
                 GameManager.coins += 5;
-            } else if (randomValue < 30) {
+            } else if (randomValue < 300) {
                 GameManager.coins -= 3;
+            } else if (randomValue < 305) {
+                GameManager.coins -= 50;
             } else {
                 GameManager.coins++;
             }
