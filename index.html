@@ -69,6 +69,11 @@
             height: 100%;
             z-index: 1;
         }
+
+        #exp-value {
+            position: absolute;
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
@@ -84,8 +89,8 @@
 
     <script>
         const coinsDisplay = document.getElementById("coins-display");
-        const expBar = document.getElementById("exp-bar");
         const expProgress = document.getElementById("exp-progress");
+        const expValueDisplay = document.getElementById("exp-value");
         const clickMeButton = document.getElementById("click-me");
         
         const GameManager = {
@@ -100,6 +105,7 @@
             },
             updateExpBar () {
                 expProgress.style.width = Math.floor(this.experience * 100 / this.exp_limit) + "%";
+                expValueDisplay.textContent = `Exp: ${this.experience}/${this.exp_limit}`;
             }
         };
 
@@ -125,6 +131,8 @@
             GameManager.showCoins();
             GameManager.updateExpBar();
         });
+
+        GameManager.updateExpBar();
     </script>
 </body>
 </html>
