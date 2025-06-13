@@ -161,7 +161,7 @@
                     <div class="card-info">
                         <div class="item-name">Coin Boost 1</div>
                         <div class="item-price">🪙300</div>
-                        <button class="purchase-button">Purchase</button>
+                        <button class="purchase-button" data-item="coin_boost_1">Purchase</button>
                     </div>
                 </div>
                 <div class="item-card">
@@ -173,7 +173,7 @@
                     <div class="card-info">
                         <div class="item-name">Coin Boost 2</div>
                         <div class="item-price">🪙5000</div>
-                        <button class="purchase-button">Purchase</button>
+                        <button class="purchase-button" data-item="coin_boost_2">Purchase</button>
                     </div>
                 </div>
             </div>
@@ -191,20 +191,31 @@
         const GameManager = {
             counter: 0,
             coins: 0,
-            experience: 0,
-            exp_multiplier: 1,
-            exp_limit: 250,
+            exp: 0,
+            coinBoost: 0,
+            expMultiplier: 1,
+            expLimit: 250,
             level: 1,
             items: {
-                coin_boost_1: false,
-                coin_boost_2: false
+                coin_boost_1: {
+                    price: 300,
+                    effect: () => {
+                        GameManager.coinBoost += 3;
+                    }
+                },
+                coin_boost_2: {
+                    price: 300,
+                    effect: () => {
+                        GameManager.coinBoost += 10;
+                    }
+                }
             },
             showCoins () {
                 coinsDisplay.textContent = this.coins; 
             },
             updateExpBar () {
-                expProgress.style.width = Math.floor(this.experience * 100 / this.exp_limit) + "%";
-                expValueDisplay.textContent = `Exp: ${this.experience}/${this.exp_limit}`;
+                expProgress.style.width = Math.floor(this.exp * 100 / this.expLimit) + "%";
+                expValueDisplay.textContent = `Exp: ${this.exp}/${this.expLimit}`;
             },
             updateLevelDisplay () {
                 levelValueDisplay.textContent = this.level;
@@ -214,28 +225,29 @@
         clickMeButton.addEventListener("click", () => {
             clickMeButton.blur();
             GameManager.counter++;
-            GameManager.experience += GameManager.exp_multiplier;
+            GameManager.exp += GameManager.expMultiplier;
 
+            const coinMultiplier = Math.floor(1 + GameManager.level / 3);
             const randomValue = Math.random() * 100000;
             if (randomValue < 50) {
-                GameManager.coins += 10;
+                GameManager.coins += 10 * coinMultiplier;
             } else if (randomValue < 250) {
-                GameManager.coins += 5;
+                GameManager.coins += 5 * coinMultiplier;
             } else if (randomValue < 300) {
-                GameManager.coins -= 3;
+                GameManager.coins -= 3 * coinMultiplier;
             } else if (randomValue < 305) {
-                GameManager.coins -= 50;
+                GameManager.coins -= 50 * coinMultiplier;
             } else {
-                GameManager.coins++;
+                GameManager.coins += (1 + GameManager.coinBoost) * coinMultiplier;
             }
 
             if (GameManager.coins < 0) {
                 GameManager.coins = 0;
             }
 
-            if (GameManager.experience >= GameManager.exp_limit) {
-                GameManager.experience = 0;
-                GameManager.exp_limit += 250;
+            if (GameManager.exp >= GameManager.expLimit) {
+                GameManager.exp = 0;
+                GameManager.expLimit += 250;
                 GameManager.level++;
                 GameManager.updateLevelDisplay();
             }
@@ -243,6 +255,8 @@
             GameManager.showCoins();
             GameManager.updateExpBar();
         });
+
+        
 
         GameManager.updateLevelDisplay();
         GameManager.updateExpBar();
