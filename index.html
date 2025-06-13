@@ -78,6 +78,7 @@
 </head>
 <body>
     <div id="game-container">
+        <div id="level-display">Level <span id="level-value"></span></div>
         <div id="exp-bar">
             <div id="exp-progress"></div>
             <div id="exp-value"></div>
@@ -91,6 +92,7 @@
         const coinsDisplay = document.getElementById("coins-display");
         const expProgress = document.getElementById("exp-progress");
         const expValueDisplay = document.getElementById("exp-value");
+        const levelValueDisplay = document.getElementById("level-value");
         const clickMeButton = document.getElementById("click-me");
         
         const GameManager = {
@@ -106,6 +108,9 @@
             updateExpBar () {
                 expProgress.style.width = Math.floor(this.experience * 100 / this.exp_limit) + "%";
                 expValueDisplay.textContent = `Exp: ${this.experience}/${this.exp_limit}`;
+            },
+            updateLevelDisplay () {
+                levelValueDisplay.textContent = this.level;
             }
         };
 
@@ -132,12 +137,14 @@
                 GameManager.experience = 0;
                 GameManager.exp_limit += 250;
                 GameManager.level++;
+                GameManager.updateLevelDisplay();
             }
                 
             GameManager.showCoins();
             GameManager.updateExpBar();
         });
 
+        GameManager.updateLevelDisplay();
         GameManager.updateExpBar();
     </script>
 </body>
