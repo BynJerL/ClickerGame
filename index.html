@@ -57,13 +57,25 @@
             width: 200px;
             height: 20px;
             background-color: slategray;
+            position: relative;
+        }
+
+        #exp-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: gold;
+            width: 0;
+            height: 100%;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
     <div id="game-container">
         <div id="exp-bar">
-
+            <div id="exp-progress"></div>
+            <div id="exp-value"></div>
         </div>
         <div id="coins-display">0</div>
         <button id="click-me">Click</button>
@@ -73,6 +85,7 @@
     <script>
         const coinsDisplay = document.getElementById("coins-display");
         const expBar = document.getElementById("exp-bar");
+        const expProgress = document.getElementById("exp-progress");
         const clickMeButton = document.getElementById("click-me");
         
         const GameManager = {
@@ -80,9 +93,13 @@
             coins: 0,
             experience: 0,
             exp_multiplier: 1,
+            exp_limit: 250,
             level: 1,
             showCoins () {
                 coinsDisplay.textContent = this.coins; 
+            },
+            updateExpBar () {
+                expProgress.style.width = Math.floor(this.experience * 100 / this.exp_limit) + "%";
             }
         };
 
@@ -106,6 +123,7 @@
             }
                 
             GameManager.showCoins();
+            GameManager.updateExpBar();
         });
     </script>
 </body>
