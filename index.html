@@ -197,6 +197,10 @@
             expLimit: 250,
             level: 1,
             items: {
+                coin_boost_1: false,
+                coin_boost_2: false
+            },
+            shopItems: {
                 coin_boost_1: {
                     price: 300,
                     effect: () => {
@@ -256,7 +260,29 @@
             GameManager.updateExpBar();
         });
 
-        
+        document.querySelectorAll(".purchase-button").forEach(button => {
+            button.addEventListener('click', (e) => {
+                const itemKey = button.getAttribute('data-item');
+                const item = GameManager.shopItems[itemKey];
+                if (!item) return;
+
+                if (GameManager.items[itemKey]) {
+                    alert("Already purchased!");
+                    return;
+                }
+
+                if (GameManager.coins >= item.price) {
+                    GameManager.coins -= item.price;
+                    GameManager.items[itemKey] = true;
+                    item.effect();
+                    GameManager.showCoins();
+                    button.textContent = "Owned";
+                    button.disabled = true;
+                } else {
+                    alert("Not enough coins!");
+                }
+            });
+        });
 
         GameManager.updateLevelDisplay();
         GameManager.updateExpBar();
